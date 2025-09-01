@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
   standalone: false,
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
+  ngOnInit(): void {
+      setTimeout(() => {
+        this.navCtrl.navigateRoot('/login')
+      }, 3000);
+  }
 }
