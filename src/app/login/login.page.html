@@ -5,12 +5,46 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+
+  <form [formGroup]="loginForm">
+    <ion-card>
+      <ion-card-content>
+
+        <ion-row>
+          <ion-col>
+            <ion-input
+            type="email"
+            label="email"
+            placeholder="example@prueba.com"
+            labelPlacement="floating"
+            formControlName="email">
+            </ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-input
+            type="password"
+            label="Password"
+            placeholder="********"
+            labelPlacement="floating"
+            formControlName="password"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button
+            type="submit"
+            color="primary"
+            [disabled]="loginForm.invalid"
+            >Login</ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>
