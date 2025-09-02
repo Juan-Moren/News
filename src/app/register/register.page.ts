@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { Storage  } from 'src/app/shared/services/storage/storage';
-
-interface IUser {
-  name: string;
-  lastName: string;
-  email: string;
-  password: string
-}
+import { IUser } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +19,7 @@ export class RegisterPage implements OnInit {
   public confirmPassword!: FormControl;
   public registerForm!: FormGroup;
 
-  constructor(private readonly storageSrv: Storage) {
+  constructor(private readonly storageSrv: Storage, private readonly router: Router) {
     this.initForm();}
 
   ngOnInit() {
@@ -39,10 +34,14 @@ export class RegisterPage implements OnInit {
         users = [];
       }
 
+      const exists = users.find(user => user.email == this.email.value);
+      if(exists) throw new Error('That email is already in use');
+
       users.push(this.registerForm.value);
 
       this.storageSrv.set('users', users);
       this.registerForm.reset();
+      this.router.navigate(['/login']);
 
     } else {
       console.log('Invalid form');

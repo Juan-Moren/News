@@ -19,6 +19,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'genesis',
+    loadChildren: () => import('./genesis/genesis.module').then( m => m.GenesisPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Storage } from '../shared/services/storage/storage';
+import { IUser } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginPage implements OnInit {
   public password!: FormControl;
   public loginForm!: FormGroup;
 
-  constructor() {
+  constructor(private readonly storageSrv: Storage) {
     this.initForm();
   }
 
@@ -22,6 +24,7 @@ export class LoginPage implements OnInit {
 
   public onLogin() {
     console.log(this.loginForm.value);
+    const users = this.storageSrv.get<IUser[]>("users") || [];
   }
 
   private initForm() {
