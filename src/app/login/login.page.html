@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <img src="assets/img/logo.png" alt="Logo" />
-    <ion-title>Iniciar Secion</ion-title>
+    <ion-title>Iniciar Sesion</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -37,7 +37,12 @@
 
         <ion-row>
           <ion-col>
-
+            <app-button
+              type="submit"
+              color="primary"
+              [disabled]="loginForm.invalid"
+              value="Login"
+              ></app-button>
           </ion-col>
         </ion-row>
 
