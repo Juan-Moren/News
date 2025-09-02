@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
+    path: 'genesis',
+    loadChildren: () => import('./genesis/genesis.module').then( m => m.GenesisPageModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
@@ -18,10 +22,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: 'genesis',
-    loadChildren: () => import('./genesis/genesis.module').then( m => m.GenesisPageModule)
   },
 ];
 
