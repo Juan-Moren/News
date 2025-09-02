@@ -18,6 +18,7 @@ const components = [
 
 @NgModule({
   declarations: [...components],
+  providers: [Storage],
   imports: [CommonModule, ...modules],
   exports: [...modules, InputComponent, ButtonComponent,],
 })

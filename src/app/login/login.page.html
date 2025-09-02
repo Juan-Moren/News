@@ -14,7 +14,11 @@
 
         <ion-row>
           <ion-col>
-            <app-input type="email" label="email" placeholder="example@prueba.com" [control]="email"></app-input>
+            <app-input
+            type="email"
+            label="Email"
+            placeholder="example@prueba.com"
+            [control]="email"></app-input>
           </ion-col>
         </ion-row>
 
@@ -24,15 +28,18 @@
             type="password"
             label="Password"
             placeholder="********"
+            [control]="password"
           ></app-input></ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
             <app-button
-            type="submit"
-            color="primary"
-            value="Login"></app-button>
+              type="submit"
+              color="primary"
+              value="Login"
+              [disabled]="loginForm.invalid"
+            ></app-button>
           </ion-col>
 
           <ion-col>
