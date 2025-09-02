@@ -7,42 +7,29 @@
 
 <ion-content [fullscreen]="true">
 
-  <form [formGroup]="loginForm"
-  (ngSubmit)="onLogin()">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
 
     <ion-card>
       <ion-card-content>
 
         <ion-row>
           <ion-col>
-            <app-input
-              type="email"
-              label="email"
-              placeholder="example@prueba.com"
-              [control]="email"
-              ></app-input>
+            <app-input type="email" label="email" placeholder="example@prueba.com" [control]="email"></app-input>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <app-input
-            type="password"
-            label="Password"
-            placeholder="********"
-            [control]="password"
-          ></app-input>
+            <app-input type="password" label="Password" placeholder="********" [control]="password"></app-input>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <app-button
-              type="submit"
-              color="primary"
-              [disabled]="loginForm.invalid"
-              value="Login"
-              ></app-button>
+            <a href="">No tienes cuenta? Registrate aqui</a>
+          </ion-col>
+          <ion-col>
+            <app-button type="submit" color="primary" [disabled]="loginForm.invalid" value="Login"></app-button>
           </ion-col>
         </ion-row>
 
