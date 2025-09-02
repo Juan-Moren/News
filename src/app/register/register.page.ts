@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Storage  } from 'src/app/shared/services/storage';
+import { Storage  } from 'src/app/shared/services/storage/storage';
+
+interface IUser {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string
+}
 
 @Component({
   selector: 'app-register',
@@ -25,8 +32,17 @@ export class RegisterPage implements OnInit {
 
   public doRegister() {
     if (this.registerForm.valid) {
-      this.storageSrv.set('user', this.registerForm.value);
       console.log(this.registerForm.value);
+
+      let users = this.storageSrv.get<IUser[]>("users");
+      if(!users) {
+        users = [];
+      }
+
+      users.push(this.registerForm.value);
+
+      this.storageSrv.set('users', users);
+      this.registerForm.reset();
 
     } else {
       console.log('Invalid form');

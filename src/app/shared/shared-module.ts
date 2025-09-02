@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { InputComponent } from './components/input/input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
+import { Storage } from './services/storage/storage';
 
 const modules = [
   IonicModule,
