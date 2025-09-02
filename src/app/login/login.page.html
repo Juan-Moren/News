@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <img src="assets/img/logo.png" alt="Logo" />
-    <ion-title>Iniciar Sesion</ion-title>
+    <ion-title>Sign up</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,16 +20,23 @@
 
         <ion-row>
           <ion-col>
-            <app-input type="password" label="Password" placeholder="********" [control]="password"></app-input>
-          </ion-col>
+            <app-input
+            type="password"
+            label="Password"
+            placeholder="********"
+          ></app-input></ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <a href="">No tienes cuenta? Registrate aqui</a>
+            <app-button
+            type="submit"
+            color="primary"
+            value="Login"></app-button>
           </ion-col>
+
           <ion-col>
-            <app-button type="submit" color="primary" [disabled]="loginForm.invalid" value="Login"></app-button>
+            <a [routerLink]="['/register']">Don't have an account? Sign up here</a>
           </ion-col>
         </ion-row>
 
