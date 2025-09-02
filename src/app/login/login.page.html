@@ -6,31 +6,31 @@
 
 <ion-content [fullscreen]="true">
 
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm"
+  (ngSubmit)="onLogin()">
+
     <ion-card>
       <ion-card-content>
 
         <ion-row>
           <ion-col>
-            <ion-input
-            type="email"
-            label="email"
-            placeholder="example@prueba.com"
-            labelPlacement="floating"
-            formControlName="email">
-            </ion-input>
+            <app-input
+              type="email"
+              label="email"
+              placeholder="example@prueba.com"
+              [control]="email"
+              ></app-input>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col>
-            <ion-input
+            <app-input
             type="password"
             label="Password"
             placeholder="********"
-            labelPlacement="floating"
-            formControlName="password"
-            ></ion-input>
+            [control]="password"
+            ></app-input>
           </ion-col>
         </ion-row>
 
