@@ -50,4 +50,9 @@
       </ion-card-content>
     </ion-card>
   </form>
+
+  <div *ngIf="errorMessage" class="error-msg">
+    {{ errorMessage }}
+  </div>
+
 </ion-content>

@@ -25,9 +25,7 @@
               [control]="name"
             ></app-input>
           </ion-col>
-        </ion-row>
 
-        <ion-row>
           <ion-col>
             <app-input
               type="text"
@@ -35,6 +33,17 @@
               placeholder="Doe"
               [control]="lastName"
             ></app-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-label>Country</ion-label>
+            <ion-select formControlName="country" interface="popover">
+              <ion-select-option *ngFor="let c of countries" [value]="c.name">
+                {{ c.flag }} {{ c.name }}
+              </ion-select-option>
+            </ion-select>
           </ion-col>
         </ion-row>
 

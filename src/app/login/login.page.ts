@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '../shared/services/storage/storage';
 import { IUser } from '../interfaces/user.interface';
 import { Route, Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginPage implements OnInit {
   public password!: FormControl;
   public loginForm!: FormGroup;
 
+  public errorMessage: string = "";
+
   constructor(private readonly storageSrv: Storage,
     private readonly router: Router) {
     this.initForm();
@@ -25,21 +28,30 @@ export class LoginPage implements OnInit {
   }
 
   public onLogin() {
-    console.log(this.loginForm.value);
+    this.errorMessage = "";
     const users = this.storageSrv.get<IUser[]>("users") || [];
 
-    const user=users.find(u => u.email == this.email.value);
-    if (!user) throw new Error('User does not exist');
+    const user = users.find(u => u.email == this.email.value);
+    if (!user) {
+      this.errorMessage = "user does not exist";
+      return;
+    }
 
-    const isValidPassword = user.password == this.password.value;
-    if(isValidPassword) return this.router.navigate(['/genesis']);
-    throw new Error("Password is incorrect");
+    const encryptedPassword = CryptoJS.SHA256(this.password.value).toString();
+
+    const isValidPassword = user.password === encryptedPassword;
+    if (isValidPassword) {
+      return this.router.navigate(['/genesis']);
+    } else {
+      this.errorMessage = "The password is incorrect.";
+    }
+    throw new Error("Password is incorrect.");
   }
 
   private initForm() {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [Validators.required,
-      Validators.minLength(3),
+    Validators.minLength(3),
     ]);
     this.loginForm = new FormGroup({
       email: this.email,
