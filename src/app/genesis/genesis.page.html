@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Noticias</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleSegment()">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Segmento de categorías -->
+  <div *ngIf="showSegment" class="segment-container">
+    <ion-segment [(ngModel)]="segmentValue" (ionChange)="onCategoriaChange()">
+      <ion-segment-button *ngFor="let cat of categorias" [value]="cat">
+        {{ cat | titlecase }}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- Mensaje de carga -->
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando noticias...</p>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+    <ion-button fill="clear" (click)="cargarNoticias()">Reintentar</ion-button>
+  </div>
+
+  <!-- Lista de noticias -->
+  <ion-refresher slot="fixed" (ionRefresh)="refrescarNoticias($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="noticias.length > 0 && !isLoading">
+    <ion-item *ngFor="let noticia of noticias" button detail>
+      <ion-avatar slot="start">
+        <img [src]="noticia.urlToImage || 'assets/placeholder.png'" [alt]="noticia.title">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ noticia.title }}</h2>
+        <p>{{ noticia.description }}</p>
+        <div class="news-meta">
+          <span>{{ noticia.source.name }}</span>
+          <span>{{ noticia.publishedAt | date:'short' }}</span>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Mensaje cuando no hay noticias -->
+  <div *ngIf="noticias.length === 0 && !isLoading && !errorMessage" class="no-news">
+    <p>No hay noticias disponibles para esta categoría</p>
+  </div>
+</ion-content>
